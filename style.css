@@ -1,0 +1,125 @@
+:root {
+    --c1: #222831;
+    --c2: #393e46;
+    --c3: #948979;
+    --c4: #dfd0b8;
+    --font-jersey20: 'Jersey 20', sans-serif;
+    --font-jersey25: 'Jersey 25', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--c1);
+    color: var(--c4);
+    overflow-x: hidden;
+}
+
+.full-width-container {
+    width: 100%;
+    background: transparent;
+    position: relative;
+}
+
+/* Container 1 Desktop Specs */
+#container-1 {
+    height: 775px;
+}
+
+.intro-text {
+    position: absolute;
+    top: 106px;
+    left: 110px;
+    font-family: var(--font-jersey20);
+    line-height: 1.1;
+}
+
+.greeting {
+    font-size: 72px;
+}
+
+.name {
+    font-size: 152px;
+}
+
+.typing-container {
+    position: absolute;
+    top: 376px;
+    left: 110px; /* Aligned with top text for visual balance */
+    font-family: var(--font-jersey20);
+    font-size: 72px;
+    text-transform: uppercase;
+}
+
+.cursor {
+    animation: blink 0.8s infinite;
+}
+
+.experience-section {
+    position: absolute;
+    top: 522px;
+    left: 117px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.experience-label {
+    font-family: var(--font-jersey20);
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+.pill-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pill-row {
+    display: flex;
+    gap: 12px;
+}
+
+.pill {
+    font-family: var(--font-jersey20);
+    font-size: 19px;
+    border: 1px solid var(--c4);
+    padding: 17px 28px;
+    border-radius: 33px;
+    white-space: nowrap;
+}
+
+/* Animations */
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Responsiveness */
+
+/* Tablet (1280px) */
+@media (max-width: 1280px) {
+    .name { font-size: 120px; }
+    .intro-text { left: 60px; }
+    .typing-container { left: 60px; }
+    .experience-section { left: 67px; }
+}
+
+/* Mobile (412px) */
+@media (max-width: 412px) {
+    #container-1 { height: auto; padding-bottom: 50px; }
+    .intro-text, .typing-container, .experience-section {
+        position: static;
+        padding: 40px 20px 0 20px;
+    }
+    .name { font-size: 64px; }
+    .greeting { font-size: 40px; }
+    .typing-container { font-size: 36px; padding-top: 20px; }
+    .experience-section { flex-direction: column; }
+    .pill-row { flex-wrap: wrap; }
+}
