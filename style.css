@@ -1,125 +1,462 @@
 :root {
-    --c1: #222831;
-    --c2: #393e46;
-    --c3: #948979;
-    --c4: #dfd0b8;
-    --font-jersey20: 'Jersey 20', sans-serif;
-    --font-jersey25: 'Jersey 25', sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+  --c1: #222831;
+  --c2: #393e46;
+  --c3: #948979;
+  --c4: #dfd0b8;
+  --font-jersey20: "Jersey 20", sans-serif;
+  --font-jersey25: "Jersey 25", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 }
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-    background-color: var(--c1);
-    color: var(--c4);
-    overflow-x: hidden;
+  background-color: var(--c1);
+  color: var(--c4);
+  overflow-x: hidden;
 }
-
 .full-width-container {
-    width: 100%;
-    background: transparent;
-    position: relative;
+  width: 100%;
+  background: transparent;
+  position: relative;
 }
-
 /* Container 1 Desktop Specs */
+
 #container-1 {
-    height: 775px;
+  min-height: 100vh; /* fallback for browsers without dvh support */
+  min-height: 100dvh; /* used when supported — later rule wins if valid */
+  padding: clamp(40px, 8vw, 106px) clamp(20px, 8vw, 110px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 24px);
 }
 
 .intro-text {
-    position: absolute;
-    top: 106px;
-    left: 110px;
-    font-family: var(--font-jersey20);
-    line-height: 1.1;
+  font-family: var(--font-jersey20);
+  line-height: 1.1;
 }
-
 .greeting {
-    font-size: 72px;
+  font-size: clamp(40px, 6vw + 2vh, 72px);
 }
-
 .name {
-    font-size: 152px;
+  font-size: clamp(48px, 12vw + 3vh, 152px);
+  display: block;
+  word-break: break-word;
 }
-
 .typing-container {
-    position: absolute;
-    top: 376px;
-    left: 110px; /* Aligned with top text for visual balance */
-    font-family: var(--font-jersey20);
-    font-size: 72px;
-    text-transform: uppercase;
+  font-family: var(--font-jersey20);
+  font-size: clamp(28px, 7vw + 2vh, 72px);
+  text-transform: uppercase;
+  min-height: 1.2em; /* reserves space so subtitle doesn't jump while typing */
 }
-
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1.5vw, 20px);
+  font-style: italic;
+  color: var(--c4);
+  max-width: 600px;
+  line-height: 1.5;
+}
 .cursor {
-    animation: blink 0.8s infinite;
+  animation: blink 0.8s infinite;
 }
 
-.experience-section {
-    position: absolute;
-    top: 522px;
-    left: 117px;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+.scroll-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto;
+  margin-top: clamp(
+    30px,
+    5vw,
+    50px
+  ); /* combined with 24px gap = ~54-74px, scales responsively */
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid var(--c4);
+  border-radius: 24px;
+  color: var(--c4);
+  font-family: var(--font-jersey20);
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.experience-label {
-    font-family: var(--font-jersey20);
-    font-size: 22px;
-    margin-top: 10px;
+.scroll-btn:hover {
+  background: var(--c4);
+  color: var(--c1);
+}
+.chevron-icon {
+  width: 16px;
+  height: 16px;
+  background-color: var(--c4); /* default: muted tone */
+  -webkit-mask: url("assets/double_arrow.svg") no-repeat center / contain;
+  mask: url("assets/double_arrow.svg") no-repeat center / contain;
+}
+.scroll-btn:hover .chevron-icon {
+  background-color: var(
+    --c1
+  ); /* matches button text flipping to dark on hover */
 }
 
-.pill-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+#case-studies {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(30px, 8vw, 80px) clamp(20px, 8vw, 110px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
-.pill-row {
-    display: flex;
-    gap: 12px;
+.quote {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: var(--c4);
+  margin-bottom: 60px;
 }
 
-.pill {
-    font-family: var(--font-jersey20);
-    font-size: 19px;
-    border: 1px solid var(--c4);
-    padding: 17px 28px;
-    border-radius: 33px;
-    white-space: nowrap;
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 280px));
+  gap: 24px;
+  justify-content: center;
 }
 
+.case-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--c1);
+  border-radius: 8px;
+  padding: 30px 20px 20px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px 1px #080a0d;
+  transition: border-color 0.2s;
+  overflow: visible;
+  width: 100%;
+  margin-top: 20px; /* room for the pill to straddle above */
+}
+
+.case-card h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(
+    -50%
+  ); /* pulls it up so it straddles the card's top edge exactly */
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-jersey20);
+  font-weight: 300;
+  font-size: clamp(20px, 1.6vw, 18px);
+  background: var(--c1);
+  border: 1px solid var(--c4);
+
+  padding: 8px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* if it's ever too tight, truncates cleanly instead of overflowing */
+  text-align: center;
+  z-index: 1; /* sits above the card's border line */
+}
+
+.case-card img {
+  width: 100%;
+  height: auto;
+  max-width: 240px;
+  object-fit: contain;
+  display: block;
+  margin-top: 20px; /* gives clearance below the now-absolutely-positioned pill */
+}
+
+.case-card:hover {
+  box-shadow: 0 5px 20px 0.5px var(--c4);
+}
+
+/* Modal Start */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-frame {
+  position: relative;
+  width: 600px;
+  max-width: 90vw;
+  height: 700px;
+  max-height: 85vh;
+  background: var(--c4); /* cream, matches Figma */
+  color: var(--c1); /* dark navy text */
+  border-radius: 16px;
+  overflow-y: auto;
+  padding: 40px;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--c1); /* was --c4, now dark to be visible on cream */
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-title {
+  font-family: var(--font-jersey20);
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.modal-hook {
+  font-family: var(--font-mono);
+  font-style: italic;
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 24px;
+  color: var(--c2);
+}
+.modal-flow-title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+  font-size: 17px;
+  margin-bottom: 24px;
+}
+.flow-step {
+  background: #f4ead9; /* slightly lighter than the modal bg, for contrast */
+  border: 1px solid var(--c3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 340px;
+}
+.flow-step-title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+}
+.flow-step-sub {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--c2);
+  margin-top: 4px;
+}
+.flow-step.critical {
+  border-color: #a33;
+  color: #a33;
+}
+.flow-step.critical .flow-step-sub {
+  color: #a33;
+}
+.flow-connector {
+  width: 1px;
+  height: 20px;
+  background: var(--c3);
+  margin: 0 auto;
+}
+.flow-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 16px 0 32px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+.flow-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--c1);
+  display: inline-block;
+}
+.legend-dot.critical {
+  border-color: #a33;
+}
+.modal-synthesis {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+.modal-cta {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px 24px;
+  border: 1px solid var(--c1);
+  border-radius: 24px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--c1);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.modal-cta:hover {
+  background: var(--c1);
+  color: var(--c4);
+}
+
+/* Specific to GORA case study */
+.modal-context {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--c2);
+  margin-bottom: 20px;
+}
+.modal-section-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 32px 0 12px;
+  color: var(--c1);
+  border-bottom: 1px solid var(--c3);
+  padding-bottom: 6px;
+}
+.finding-card {
+  background: #f4ead9;
+  border: 1px solid var(--c3);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.finding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.finding-title {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+}
+.severity-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.severity-critical {
+  background: #f0d3d3;
+  color: #a33;
+}
+.severity-moderate {
+  background: #f5e3c3;
+  color: #8a5a12;
+}
+.severity-cosmetic {
+  background: #ddeae0;
+  color: #2f6b46;
+}
+.finding-heuristic {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--c2);
+  margin-bottom: 6px;
+}
+.finding-suggestion {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.finding-suggestion strong {
+  font-weight: 700;
+}
+.callout-box {
+  background: #eadfc9;
+  border-left: 3px solid var(--c1);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* specific  to Movie ticket design case study */
+.priority-row {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+.priority-card {
+  flex: 1;
+  background: #f4ead9;
+  border: 1px solid var(--c3);
+  border-radius: 8px;
+  padding: 14px 10px;
+  text-align: center;
+}
+.priority-moment {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--c2);
+  margin-bottom: 6px;
+}
+.priority-focus {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Modal end */
+.intro-text,
+.typing-container,
+.subtitle,
+.scroll-btn {
+  user-select: none;
+  -webkit-user-select: none;
+}
 /* Animations */
 @keyframes blink {
-    50% { opacity: 0; }
+  50% {
+    opacity: 0;
+  }
 }
-
 /* Responsiveness */
-
 /* Tablet (1280px) */
 @media (max-width: 1280px) {
-    .name { font-size: 120px; }
-    .intro-text { left: 60px; }
-    .typing-container { left: 60px; }
-    .experience-section { left: 67px; }
+  #container-1 {
+    padding: clamp(40px, 8vw, 80px) clamp(20px, 6vw, 60px);
+  }
 }
-
 /* Mobile (412px) */
 @media (max-width: 412px) {
-    #container-1 { height: auto; padding-bottom: 50px; }
-    .intro-text, .typing-container, .experience-section {
-        position: static;
-        padding: 40px 20px 0 20px;
-    }
-    .name { font-size: 64px; }
-    .greeting { font-size: 40px; }
-    .typing-container { font-size: 36px; padding-top: 20px; }
-    .experience-section { flex-direction: column; }
-    .pill-row { flex-wrap: wrap; }
+  #container-1 {
+    gap: 16px;
+  }
 }

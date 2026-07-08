@@ -1,45 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lakshmi | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Jersey+25&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Jersey+25&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <main class="single-page">
-        <section id="container-1" class="full-width-container">
-            <div class="intro-text">
-                <span class="greeting">Hi,</span><br>
-                <span class="name">I'm Lakshmi</span>
-            </div>
+      <section id="container-1" class="full-width-container">
+        <div class="intro-text">
+          <span class="greeting">Hi,</span><br />
+          <span class="name">I'm Lakshmi</span>
+        </div>
+        <div class="typing-container">
+          <span id="typing-text" class="jersey-20"></span
+          ><span class="cursor">|</span>
+        </div>
+        <div class="subtitle">
+          I design for the messy, high-stakes products most designers never
+          touch.
+        </div>
 
-            <div class="typing-container">
-                <span id="typing-text" class="jersey-20"></span><span class="cursor">|</span>
-            </div>
+        <button
+          class="scroll-btn"
+          onclick="
+            document
+              .getElementById('case-studies')
+              .scrollIntoView({ behavior: 'smooth' })
+          "
+        >
+          See how I think
+          <span class="chevron-icon"></span>
+        </button>
+      </section>
 
-            <div class="experience-section">
-                <p class="experience-label">along with experience in</p>
-                <div class="pill-grid">
-                    <div class="pill-row">
-                        <span class="pill">Computer Vision</span>
-                        <span class="pill">ServiceNow Dev</span>
-                    </div>
-                    <div class="pill-row">
-                        <span class="pill">Graphic Design</span>
-                        <span class="pill">Marketing</span>
-                        <span class="pill">Sales</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <section id="case-studies" class="full-width-container">
+        <p class="quote">"Necessity is the mother of invention"</p>
+        <div class="case-study-grid">
+          <div class="case-card" onclick="openModal('letterboxd')">
+            <h3>Letterboxd Audit</h3>
+            <img
+              src="assets/undraw_home-cinema_jdm1 1.png"
+              alt="Letterboxd audit thumbnail"
+            />
+          </div>
+          <div class="case-card" onclick="openModal('gora')">
+            <h3>GORA Reservation Flow Audit</h3>
+            <img src="assets\undraw_golf_wmi1.svg" alt="GORA audit thumbnail" />
+          </div>
+          <div class="case-card" onclick="openModal('ticket')">
+            <h3>Movie Ticket Audit & Redesign</h3>
+            <img
+              src="assets\undraw_receipt_tzi0.svg"
+              alt="Movie ticket redesign thumbnail"
+            />
+          </div>
+        </div>
+      </section>
 
-        <section id="container-2" class="full-width-container">
-            </section>
+      <!-- Modal overlay, shared by all three -->
+      <div
+        id="modal-overlay"
+        class="modal-overlay"
+        onclick="closeModalOnOverlay(event)"
+      >
+        <div class="modal-frame">
+          <button class="modal-close" onclick="closeModal()">✕</button>
+          <div id="modal-content" class="modal-content">
+            <!-- injected per case study -->
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
