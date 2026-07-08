@@ -460,3 +460,72 @@ body {
     gap: 16px;
   }
 }
+/* Contacts Section*/
+.contact-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  
+  padding: clamp(40px, 8vw, 106px) clamp(20px, 8vw, 110px);
+  display: flex;
+  align-items: center;
+}
+
+.contact-heading {
+  font-family: var(--font-jersey20);
+  font-size: clamp(48px, 20vw, 120px);
+  line-height: 1.1;
+  color: var(--c4);
+  margin: 0;
+  margin-top: -0.15em; /* pulls the glyph up to visually align with the links */
+}
+
+
+.contact-inner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* was flex-start — links column is vertically centered against heading, not top-aligned */
+  width: 100%;
+  max-width: 1125px;
+  flex-wrap: wrap;
+  gap: clamp(40px, 15vw, 294px); /* updated to match the yellow line measurement */
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 1.5vw, 18px);
+  padding-top: 0; /* no longer needed — centering handles vertical position now */
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--c4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.contact-link:hover {
+  color: var(--c3);
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .contact-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .contact-links {
+    padding-top: 0;
+  }
+}
+/* Contact Section End */
