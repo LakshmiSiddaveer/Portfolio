@@ -44,9 +44,10 @@
         <button
           class="scroll-btn"
           onclick="
+            gtag('event', 'click_see_how_i_think');
             document
               .getElementById('case-studies')
-              .scrollIntoView({ behavior: 'smooth' })
+              .scrollIntoView({ behavior: 'smooth' });
           "
         >
           See how I think
@@ -79,9 +80,10 @@
         <button
           class="scroll-btn"
           onclick="
+            gtag('event', 'click_contact_me');
             document
               .getElementById('contact')
-              .scrollIntoView({ behavior: 'smooth' })
+              .scrollIntoView({ behavior: 'smooth' });
           "
         >
           Contact me
