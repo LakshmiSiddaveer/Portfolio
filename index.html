@@ -1,199 +1,1649 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-NXCRRCZR");
-    </script>
-    <!-- End Google Tag Manager -->
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-KC7YLDHLN8"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-KC7YLDHLN8");
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lakshmi | Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Lakshmi Siddaveer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Jersey+25&family=JetBrains+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600&family=Roboto+Slab:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
+    <style>
+      :root {
+        --paper: #faf9f6;
+        --ink: #151412;
+        --ink-soft: #5c5a54;
+        --line: #dedad2;
+        --card-back: #141311;
+        --card-back-ink: #f2efe9;
+        --signal: #2e4bff;
+        --overlay: rgba(15, 14, 12, 0.55);
+        --radius: 6px;
+        --font-display: "Roboto Slab", Georgia, "Times New Roman", serif;
+        --font-ui: "Raleway", -apple-system, "Segoe UI", sans-serif;
+        --carousel-scroll-duration: 40s;
+        --carousel-gap: 2rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --paper: #141311;
+          --ink: #f2efe9;
+          --ink-soft: #b7b3aa;
+          --line: #302e29;
+          --card-back: #faf9f6;
+          --card-back-ink: #151412;
+          --overlay: rgba(0, 0, 0, 0.7);
+        }
+      }
+      :root[data-theme="dark"] {
+        --paper: #141311;
+        --ink: #f2efe9;
+        --ink-soft: #b7b3aa;
+        --line: #302e29;
+        --card-back: #faf9f6;
+        --card-back-ink: #151412;
+        --overlay: rgba(0, 0, 0, 0.7);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font-ui);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* ---------- Sound bar (audio-playing indicator) ---------- */
+      .sound-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #ff6ec4, #ff9a56, #ff6ec4);
+        background-size: 200% 100%;
+        transform-origin: top;
+        transform: scaleY(0);
+        opacity: 0;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+        z-index: 300;
+        pointer-events: none;
+      }
+      .sound-bar.is-active {
+        transform: scaleY(1);
+        opacity: 1;
+        animation: soundBarShimmer 1.4s linear infinite;
+      }
+      @keyframes soundBarShimmer {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 200% 50%;
+        }
+      }
+
+      /* ---------- Nav ---------- */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 150;
+        background: var(--paper);
+        border-bottom: 1px solid var(--line);
+      }
+      .nav-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      @media (max-width: 600px) {
+        .nav-inner {
+          padding: 16px 20px;
+        }
+      }
+      .nav-logo {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--ink);
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .nav-logo img {
+        height: 60px;
+        width: auto;
+        display: block;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .nav-link {
+        font-family: var(--font-ui);
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink-soft);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+      }
+      .nav-link:hover,
+      .nav-link:focus-visible {
+        color: var(--signal);
+      }
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 32px;
+        height: 32px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        flex-shrink: 0;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--ink);
+        border-radius: 2px;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+      }
+      .nav-toggle.is-open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .nav-toggle.is-open span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.is-open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      @media (max-width: 768px) {
+        .nav-toggle {
+          display: flex;
+        }
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          background: var(--paper);
+          border-bottom: 1px solid var(--line);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.32s ease;
+        }
+        .nav-links.is-open {
+          max-height: 280px;
+        }
+        .nav-link {
+          width: 100%;
+          padding: 14px 20px;
+          border-top: 1px solid var(--line);
+        }
+      }
+
+      .page {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 32px 96px;
+      }
+      @media (max-width: 600px) {
+        .page {
+          padding: 0 20px 80px;
+        }
+      }
+
+      section {
+        padding-top: 88px;
+      }
+      section:first-of-type {
+        padding-top: 72px;
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 40px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 48px;
+      }
+      .hero h1 {
+        font-family: var(--font-display);
+        font-weight: 500;
+        font-size: clamp(40px, 6vw, 64px);
+        margin: 0;
+        line-height: 1;
+      }
+      .hero-side {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .hero-roles {
+        font-size: 14px;
+        line-height: 1.9;
+      }
+      .hero-roles .role-row {
+        display: flex;
+        gap: 10px;
+      }
+      .hero-roles .org {
+        font-weight: 600;
+        min-width: 10px;
+      }
+      .hero-roles .title {
+        color: var(--ink-soft);
+      }
+      .audio-player {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .audio-toggle {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+        background: none;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease;
+      }
+      .audio-toggle:hover {
+        border-color: var(--signal);
+      }
+      .audio-toggle svg {
+        width: 14px;
+        height: 14px;
+      }
+      .audio-label {
+        font-size: 12px;
+        color: var(--ink-soft);
+      }
+
+      /* ---------- Section heads ---------- */
+      .section-head {
+        margin-bottom: 40px;
+        max-width: 520px;
+      }
+      .section-head h2 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: clamp(26px, 4vw, 34px);
+        line-height: 1.15;
+        margin: 0 0 12px;
+      }
+      .section-head p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+
+      /* ---------- Selected work grid ---------- */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 600px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card-scene {
+        perspective: 1400px;
+        height: 260px;
+      }
+
+      .card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        transform-style: preserve-3d;
+        transition: transform 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: pointer;
+      }
+      .card-scene:hover .card,
+      .card-scene:focus-within .card {
+        transform: rotateY(180deg);
+      }
+
+      .card-face {
+        position: absolute;
+        inset: 0;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: var(--radius);
+        padding: 26px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .card-front {
+        background: var(--paper);
+        border: 1px solid var(--line);
+      }
+      .card-front .kicker {
+        font-size: 12px;
+        color: var(--ink-soft);
+      }
+      .card-front .name {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 1.2;
+        margin-top: auto;
+      }
+      .card-front .hint {
+        font-size: 12px;
+        color: var(--ink-soft);
+        margin-top: 14px;
+      }
+
+      .card-back {
+        background: var(--card-back);
+        color: var(--card-back-ink);
+        transform: rotateY(180deg);
+        border: 1px solid var(--card-back);
+      }
+      .card-back .field-label {
+        font-size: 11px;
+        color: color-mix(in srgb, var(--card-back-ink) 55%, transparent);
+        margin-bottom: 6px;
+      }
+      .card-back .domain {
+        font-family: var(--font-display);
+        font-size: 19px;
+        line-height: 1.35;
+        margin-bottom: 22px;
+      }
+      .card-back .role {
+        font-size: 14px;
+        line-height: 1.5;
+        color: color-mix(in srgb, var(--card-back-ink) 85%, transparent);
+      }
+      .card-back .open-hint {
+        font-size: 12px;
+        color: color-mix(in srgb, var(--card-back-ink) 60%, transparent);
+        margin-top: auto;
+        padding-top: 14px;
+      }
+
+      /* ---------- Posters Carousel ---------- */
+      .carousel {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .carousel::-webkit-scrollbar {
+        display: none;
+      }
+      .carousel-track {
+        display: flex;
+        gap: var(--carousel-gap);
+        animation: scroll-left var(--carousel-scroll-duration) linear infinite;
+        width: fit-content;
+      }
+      .carousel-track.paused {
+        animation-play-state: paused;
+      }
+      @keyframes scroll-left {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(calc(-50% - var(--carousel-gap) / 2));
+        }
+      }
+      .carousel-item {
+        flex: 0 0 auto;
+        width: 320px;
+        background-color: var(--paper);
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        transition:
+          transform 150ms ease-in-out,
+          box-shadow 150ms ease-in-out;
+      }
+      @media (max-width: 768px) {
+        .carousel-item {
+          width: 260px;
+        }
+      }
+      .carousel-item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+      .carousel-item-info {
+        padding: 1rem;
+        text-align: left;
+      }
+      .carousel-item-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .carousel-item-tag {
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+      }
+      .carousel-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      /* ---------- Contact Section ---------- */
+      .contact-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+      @media (max-width: 600px) {
+        .contact-buttons {
+          flex-direction: column;
+        }
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.875rem 1.5rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--ink);
+        background-color: var(--ink);
+        color: var(--paper);
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 250ms ease-in-out;
+        gap: 0.75rem;
+      }
+      .btn:hover {
+        background-color: var(--signal);
+        border-color: var(--signal);
+        color: #ffffff;
+        transform: translateY(-2px);
+      }
+      .btn-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      /* ---------- Modal ---------- */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: var(--overlay);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.28s ease;
+        z-index: 100;
+      }
+      .overlay.is-open {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal {
+        background: var(--paper);
+        color: var(--ink);
+        width: 100%;
+        max-width: 560px;
+        max-height: 80vh;
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        transform: scale(0.94);
+        opacity: 0;
+        transition:
+          transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1),
+          opacity 0.28s ease;
+      }
+      .overlay.is-open .modal {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      .modal-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 28px 30px 18px;
+        border-bottom: 1px solid var(--line);
+        flex-shrink: 0;
+      }
+      .modal-head .kicker {
+        font-size: 12px;
+        color: var(--ink-soft);
+        margin-bottom: 8px;
+      }
+      .modal-head h3 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 24px;
+        margin: 0;
+        line-height: 1.2;
+      }
+      .modal-close {
+        background: none;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--ink);
+        font-size: 16px;
+        line-height: 1;
+        transition:
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .modal-close:hover {
+        border-color: var(--signal);
+        transform: rotate(90deg);
+      }
+      .modal-close:focus-visible,
+      .card:focus-visible {
+        outline: 2px solid var(--signal);
+        outline-offset: 2px;
+      }
+
+      .modal-body {
+        overflow-y: auto;
+        padding: 24px 30px 30px;
+      }
+
+      .modal-section {
+        margin-bottom: 22px;
+      }
+      .modal-section:last-child {
+        margin-bottom: 0;
+      }
+      .modal-section h4 {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--ink);
+        margin: 0 0 14px;
+      }
+      .modal-section p {
+        font-size: 14.5px;
+        line-height: 1.7;
+        color: var(--ink);
+        margin: 0 0 14px;
+      }
+      .modal-section p:last-child {
+        margin-bottom: 0;
+      }
+      .modal-section ul {
+        margin: 0 0 14px;
+        padding-left: 20px;
+      }
+      .modal-section li {
+        font-size: 14.5px;
+        line-height: 1.65;
+        color: var(--ink);
+        margin-bottom: 8px;
+      }
+      .modal-section img {
+        width: 100%;
+        border-radius: var(--radius);
+        margin: 4px 0 22px;
+        display: block;
+      }
+      .modal-section .modal-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: var(--radius);
+        border: 1px solid var(--ink);
+        background: var(--ink);
+        color: var(--paper);
+        font-size: 13.5px;
+        font-weight: 500;
+        text-decoration: none;
+        transition:
+          background 0.2s ease,
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .modal-section .modal-link:hover {
+        background: var(--signal);
+        border-color: var(--signal);
+        color: #fff;
+        transform: translateY(-1px);
+      }
+      .modal-section video {
+        width: 100%;
+        border-radius: var(--radius);
+        margin: 4px 0 22px;
+        display: block;
+      }
+      /* ---------- FAQ ---------- */
+      .faq-list {
+        border-top: 1px solid var(--line);
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--line);
+      }
+      .faq-question {
+        width: 100%;
+        background: none;
+        border: none;
+        font-family: var(--font-ui);
+        color: var(--ink);
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 22px 4px;
+        cursor: pointer;
+      }
+      .faq-question .q-text {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+      .faq-question:focus-visible {
+        outline: 2px solid var(--signal);
+        outline-offset: 4px;
+      }
+      .faq-chevron {
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .faq-item.is-open .faq-chevron {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer-wrap {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.36s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .faq-item.is-open .faq-answer-wrap {
+        grid-template-rows: 1fr;
+      }
+      .faq-answer-inner {
+        overflow: hidden;
+      }
+      .faq-answer {
+        font-size: 14.5px;
+        line-height: 1.7;
+        color: var(--ink-soft);
+        max-width: 620px;
+        margin: 0;
+        padding: 0 4px 24px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card,
+        .overlay,
+        .modal,
+        .modal-close,
+        .faq-chevron,
+        .faq-answer-wrap,
+        .carousel-track {
+          transition: none !important;
+          animation: none !important;
+        }
+        .sound-bar.is-active {
+          animation: none !important;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript
-      ><iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-NXCRRCZR"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      ></iframe
-    ></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <main class="single-page">
-      <section id="container-1" class="full-width-container">
-        <div class="intro-text">
-          <span class="greeting">Hi,</span><br />
-          <span class="name">I'm Lakshmi</span>
-        </div>
-        <div class="typing-container">
-          <span id="typing-text" class="jersey-20"></span
-          ><span class="cursor">|</span>
-        </div>
-        <div class="subtitle">
-          I design for the messy, high-stakes products most designers never
-          touch.
-        </div>
+    <div class="sound-bar" id="soundBar"></div>
 
+    <nav class="nav" id="mainNav">
+      <div class="nav-inner">
+        <!-- <a href="#top" class="nav-logo">LS</a> -->
+        <a href="#top" class="nav-logo">
+          <img src="src\WithoutIDCardBW.png" alt="Lakshmi Siddaveer logo" />
+        </a>
         <button
-          class="scroll-btn"
-          onclick="
-            gtag('event', 'click_see_how_i_think');
-            document
-              .getElementById('case-studies')
-              .scrollIntoView({ behavior: 'smooth' });
-          "
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
         >
-          See how I think
-          <span class="chevron-icon"></span>
+          <span></span><span></span><span></span>
         </button>
-      </section>
-
-      <section id="case-studies" class="full-width-container">
-        <p class="quote">"Necessity is the mother of invention"</p>
-        <div class="case-study-grid">
-          <div class="case-card" onclick="openModal('letterboxd')">
-            <h3>Letterboxd Audit</h3>
-            <img
-              src="assets/undraw_home-cinema_jdm1 1.png"
-              alt="Letterboxd audit thumbnail"
-            />
-          </div>
-          <div class="case-card" onclick="openModal('gora')">
-            <h3>GORA Reservation Flow Audit</h3>
-            <img src="assets\undraw_golf_wmi1.svg" alt="GORA audit thumbnail" />
-          </div>
-          <div class="case-card" onclick="openModal('ticket')">
-            <h3>Movie Ticket Audit & Redesign</h3>
-            <img
-              src="assets\undraw_receipt_tzi0.svg"
-              alt="Movie ticket redesign thumbnail"
-            />
-          </div>
-        </div>
-        <button
-          class="scroll-btn"
-          onclick="
-            gtag('event', 'click_contact_me');
-            document
-              .getElementById('contact')
-              .scrollIntoView({ behavior: 'smooth' });
-          "
-        >
-          Contact me
-          <span class="chevron-icon"></span>
-        </button>
-      </section>
-      <section id="contact" class="full-width-container contact-section">
-        <div class="contact-inner">
-          <h2 class="contact-heading">Get in<br />touch.</h2>
-          <div class="contact-links">
-            <a href="mailto:lakshmisiddaveer@gmail.com" class="contact-link">
-              <svg
-                class="contact-icon"
-                viewBox="0 0 122.88 103.44"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="currentColor"
-                  d="M69.49,102.77L49.8,84.04l-20.23,18.27c-0.45,0.49-1.09,0.79-1.8,0.79c-1.35,0-2.44-1.09-2.44-2.44V60.77L0.76,37.41 c-0.98-0.93-1.01-2.47-0.09-3.45c0.31-0.33,0.7-0.55,1.11-0.67l0,0l118-33.2c1.3-0.36,2.64,0.39,3.01,1.69 c0.19,0.66,0.08,1.34-0.24,1.89l-49.2,98.42c-0.6,1.2-2.06,1.69-3.26,1.09C69.86,103.07,69.66,102.93,69.49,102.77L69.49,102.77 L69.49,102.77z M46.26,80.68L30.21,65.42v29.76L46.26,80.68L46.26,80.68z M28.15,56.73l76.32-47.26L7.22,36.83L28.15,56.73 L28.15,56.73z M114.43,9.03L31.79,60.19l38.67,36.78L114.43,9.03L114.43,9.03z"
-                />
-              </svg>
-              lakshmisiddaveer@gmail.com
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/lakshmi-siddaveer/"
-              target="_blank"
-              class="contact-link"
-            >
-              <svg
-                class="contact-icon"
-                viewBox="0 0 122.88 122.31"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="#0a66c2"
-                  fill-rule="evenodd"
-                  d="M27.75,0H95.13a27.83,27.83,0,0,1,27.75,27.75V94.57a27.83,27.83,0,0,1-27.75,27.74H27.75A27.83,27.83,0,0,1,0,94.57V27.75A27.83,27.83,0,0,1,27.75,0Z"
-                />
-                <path
-                  fill="#fff"
-                  fill-rule="evenodd"
-                  d="M49.19,47.41H64.72v8h.22c2.17-3.88,7.45-8,15.34-8,16.39,0,19.42,10.2,19.42,23.47V98.94H83.51V74c0-5.71-.12-13.06-8.42-13.06s-9.72,6.21-9.72,12.65v25.4H49.19V47.41ZM40,31.79a8.42,8.42,0,1,1-8.42-8.42A8.43,8.43,0,0,1,40,31.79ZM23.18,47.41H40V98.94H23.18V47.41Z"
-                />
-              </svg>
-              /lakshmi-siddaveer
-            </a>
-
-            <a
-              href="https://theproductdissect.substack.com/"
-              target="_blank"
-              class="contact-link"
-            >
-              <svg
-                class="contact-icon"
-                viewBox="0 0 448 511.471"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="#FF681A"
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M0 0h448v62.804H0V0zm0 229.083h448v282.388L223.954 385.808 0 511.471V229.083zm0-114.542h448v62.804H0v-62.804z"
-                />
-              </svg>
-              The Product Dissect
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Modal overlay, shared by all three -->
-      <div
-        id="modal-overlay"
-        class="modal-overlay"
-        onclick="closeModalOnOverlay(event)"
-      >
-        <div class="modal-frame">
-          <button class="modal-close" onclick="closeModal()">✕</button>
-          <div id="modal-content" class="modal-content">
-            <!-- injected per case study -->
-          </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#work" class="nav-link">Selected Work</a>
+          <a href="#posters" class="nav-link">Selected Graphic Design Work</a>
+          <a href="#faq" class="nav-link">FAQs</a>
+          <a href="#contact" class="nav-link">Let's Connect</a>
         </div>
       </div>
-    </main>
+    </nav>
 
-    <script src="script.js"></script>
+    <div class="page">
+      <section class="hero" id="top">
+        <h1>Lakshmi<br />Siddaveer</h1>
+        <!-- <div class="audio-player">
+            <button
+              class="audio-toggle"
+              id="audioToggle"
+              aria-label="Play audio intro"
+            >
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+              <svg
+                class="icon-pause"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                style="display: none"
+              >
+                <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+              </svg>
+            </button>
+            <span class="audio-label">Audio intro</span>
+            <audio
+              id="audioEl"
+              src="src\Welcome to my portfolio.ogg"
+              preload="none"
+            ></audio>
+          </div> -->
+        <div class="hero-side">
+          <div class="hero-roles" id="heroRoles"></div>
+        </div>
+      </section>
+
+      <!-- Selected Work Section -->
+      <section id="work">
+        <div class="section-head">
+          <h2>Selected work</h2>
+          <p>
+            Three shipped or in-progress projects. Hover a card to see the
+            domain and role, click to open the full write-up.
+          </p>
+        </div>
+        <div class="grid" id="cardGrid"></div>
+      </section>
+
+      <!-- Posters Scroll Feature from Website B -->
+      <section id="posters">
+        <div class="section-head">
+          <h2>Selected graphic design work</h2>
+          <p>A continuous scroll of poster design and brand collateral.</p>
+        </div>
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="carouselTrack">
+            <article class="carousel-item">
+              <img
+                src="src/bci insta.png"
+                alt="Brain Computer Interface poster design"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Brain Computer Interface</h3>
+                <span class="carousel-item-tag">Poster & Graphic Design</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img
+                src="src/Farewell2024.png"
+                alt="Farewell 2024 event graphic poster design"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Farewell 2024</h3>
+                <span class="carousel-item-tag">Event Branding</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img
+                src="src/social media.png"
+                alt="Eco Prayana Initiative poster"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Eco Prayana Initiative</h3>
+                <span class="carousel-item-tag">Social Media Design</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img
+                src="src/codingdrone.png"
+                alt="Coding Drone promotional poster design"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Coding Drone</h3>
+                <span class="carousel-item-tag">Poster Design</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img
+                src="src/HSP insta copy.png"
+                alt="Healthcare Startup Pitch graphic design poster"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Healthcare Startup Pitch</h3>
+                <span class="carousel-item-tag">Brand Collateral</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img
+                src="src/thanksgiving.png"
+                alt="Thanksgiving event poster graphic design"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Thanksgiving</h3>
+                <span class="carousel-item-tag">Social Media & Event</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img src="src/mrutsav.png" alt="Mr Utsav graphic design poster" />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Mr Utsav</h3>
+                <span class="carousel-item-tag">Poster Design</span>
+              </div>
+            </article>
+
+            <article class="carousel-item">
+              <img
+                src="src/ROCKRISEQUEST.png"
+                alt="Rockrise Quest social media poster design"
+              />
+              <div class="carousel-item-info">
+                <h3 class="carousel-item-title">Rockrise Quest</h3>
+                <span class="carousel-item-tag">Social Media Campaign</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq">
+        <div class="section-head">
+          <h2>FAQs</h2>
+          <p>The questions I actually get asked, answered straight.</p>
+        </div>
+        <div class="faq-list" id="faqList"></div>
+      </section>
+
+      <!-- Contact Feature from Website B -->
+      <section id="contact">
+        <div class="section-head">
+          <h2>Let's Connect</h2>
+          <p>Reach out via email or connect across social channels.</p>
+        </div>
+        <div class="contact-buttons">
+          <a
+            href="https://www.linkedin.com/in/lakshmi-siddaveer"
+            class="btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Connect on LinkedIn"
+          >
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.4a1.6 1.6 0 1 0 1.6 1.6 1.6 1.6 0 0 0-1.6-1.6z"
+              />
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a
+            href="mailto:lakshmisiddaveer@gmail.com"
+            class="btn"
+            aria-label="Send an email"
+          >
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+              />
+            </svg>
+            <span>Email</span>
+          </a>
+
+          <a
+            href="https://behance.net/lakshmisiddave"
+            class="btn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View portfolio on Behance"
+          >
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M22 7h-7V5h7v2zm-1.72 5.03c-.22-.98-.94-1.68-2.2-1.68-1.57 0-2.42 1.19-2.42 2.76 0 1.62.88 2.76 2.45 2.76 1.1 0 1.88-.54 2.15-1.55h-1.68c-.12.33-.37.52-.77.52-.61 0-1.02-.45-1.05-1.16h3.58c.02-.19.04-.45.04-.65 0-.32-.03-.73-.1-1zm-3.53.22c.07-.63.45-1.02.99-1.02.52 0 .88.37.95 1.02h-1.94zM10.84 10.3c.69-.37 1.12-1.03 1.12-1.89 0-1.42-1.08-2.21-2.82-2.21H4v11.6h5.45c1.87 0 3.05-.88 3.05-2.43 0-1.19-.68-2.09-1.66-2.67zM6.65 8.12h2.2c.81 0 1.28.37 1.28.98 0 .63-.49 1.02-1.28 1.02h-2.2V8.12zm2.4 7.74h-2.4v-2.22h2.4c.9 0 1.41.4 1.41 1.1 0 .73-.51 1.12-1.41 1.12z"
+              />
+            </svg>
+            <span>Behance</span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="overlay" id="overlay">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div class="modal-head">
+          <div class="title-group">
+            <div class="kicker" id="modalKicker"></div>
+            <h3 id="modalTitle"></h3>
+          </div>
+          <button class="modal-close" id="modalClose" aria-label="Close">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+      </div>
+    </div>
+
+    <script>
+      /* ---------------- Nav ---------------- */
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      navToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.toggle("is-open");
+        navToggle.classList.toggle("is-open", isOpen);
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      navLinks.querySelectorAll(".nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("is-open");
+          navToggle.classList.remove("is-open");
+          navToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      /* ---------------- Hero Roles ---------------- */
+      const roles = [
+        ["KPMG", "Analyst — Tech Consulting"],
+        ["The Product Dissect", "Founder"],
+        ["Autoyos", "Intern — AI/ML, Biomedical"],
+        ["Shankara Cancer Hospital", "Intern — Biomedical"],
+        ["itie Knowledge Solutions", "Intern — Data Analysis"],
+        ["Rocket Growth", "Intern — Product Design"],
+        ["Under 25", "Intern — Marketing, Design, Sales"],
+        ["Inkarto", "Intern — Design, SEO"],
+      ];
+
+      const heroRoles = document.getElementById("heroRoles");
+      if (heroRoles) {
+        heroRoles.innerHTML = roles
+          .map(
+            ([org, title]) => `
+              <div class="role-row">
+                <div class="org">${org}</div>
+                <div class="title">${title}</div>
+              </div>
+            `,
+          )
+          .join("");
+      }
+
+      /* ---------------- Audio + sound bar ---------------- */
+      //   const audioToggle = document.getElementById("audioToggle");
+      //   const audioEl = document.getElementById("audioEl");
+      //   const iconPlay = audioToggle.querySelector(".icon-play");
+      //   const iconPause = audioToggle.querySelector(".icon-pause");
+      //   const soundBar = document.getElementById("soundBar");
+
+      //   audioToggle.addEventListener("click", () => {
+      //     if (audioEl.paused) {
+      //       audioEl.play();
+      //       iconPlay.style.display = "none";
+      //       iconPause.style.display = "block";
+      //       audioToggle.setAttribute("aria-label", "Pause audio intro");
+      //       soundBar.classList.add("is-active");
+      //     } else {
+      //       audioEl.pause();
+      //       iconPlay.style.display = "block";
+      //       iconPause.style.display = "none";
+      //       audioToggle.setAttribute("aria-label", "Play audio intro");
+      //       soundBar.classList.remove("is-active");
+      //     }
+      //   });
+
+      //   audioEl.addEventListener("ended", () => {
+      //     iconPlay.style.display = "block";
+      //     iconPause.style.display = "none";
+      //     audioToggle.setAttribute("aria-label", "Play audio intro");
+      //     soundBar.classList.remove("is-active");
+      //   });
+
+      /* ---------------- Selected Work ---------------- */
+      const projects = [
+        {
+          name: "Load Balancer",
+          domain: "Personal productivity tool",
+          role: "Concept, design, build",
+          sections: [
+            {
+              heading1: "Why",
+              paragraphs: [
+                "To help polymaths avoid organizing fatigue and actually get their tasks done without procrastination.",
+                "Polymath's definition is: a person of great and varied learning who achieves deep competence across multiple fields rather than just surface-level awareness.",
+                "Imagine there exists a Tony. He loves exploring new ideas and concepts in life. This great habit of curiosity has become a curse. He wants to keep track of all his vast and diverse interests, so he installs apps like Notion and Obsidian and spends days just setting things up. If he didn't do all of that, he'd have used simple to-dos like the built-in ones on his device. But there he can only list items in one dimension, so it gets cluttered fast, no priority-setting for what needs to be done and for which of his interests.",
+                "That's where Load Balancer comes in, to fill this gap. I know how polymaths function and behave. How do I know this? I'm a Tony, it's me.",
+              ],
+              image: {
+                src: "src/LoadBalancerConceptSketch.jpeg",
+                alt: "Load Balancer concept sketch",
+              },
+            },
+            {
+              heading1: "Methodology",
+              paragraphs: [
+                "Now as polymaths we want some organizing systems, but doing this organising itself shouldn't become a full-time job.",
+                "So I designed Load Balancer with 3 categories. Why 3? Why not more? Why no flexibility in allowing more categories?",
+                "If we allow that, then it's back to step 0, back to organizing fatigue.",
+                "So what are these 3 categories: Tasks (duh), Courses 👀, and Ideas (yeah, because polymaths just cannot stop coming up with new ideas they want to explore, this trait gets coded into their DNA, I guess).",
+                "So how would a user's happy path look? Since the industry-standard advice given to polymaths is to not pursue multiple interests but to pursue them one at a time for a good chunk of duration, the user picks a goal and all tasks related to that goal go under the Tasks tab. Often there are things you'd need to learn for this goal, those get listed under Courses. And the Ideas tab is the place to stack away all the billion-dollar ideas that come to the polymath while focusing on one goal.",
+              ],
+              image: {
+                src: "src/LoadBalancerHappyPath.png",
+                alt: "Load Balancer three-category structure happy path",
+              },
+            },
+            {
+              heading1: "End Results / Deliverable",
+              paragraphs: [
+                "Some features that are intentionally made, the way they are made:",
+              ],
+              bullets: [
+                "The new-entry button placed at the center of the bottom of the screen, for quick capture.",
+                "Easy-to-slide cards for marking off tasks as complete or deleting them, coz no extra energy should be spent here.",
+                "Sound effects for each quick capture and card slide, to help boost mood.",
+              ],
+              video: {
+                src: "src/load-balancer.mp4",
+                poster: "src/LoadBalancerPoster.png",
+                alt: "video of load balancer being demoed",
+              },
+            },
+            {
+              heading1: "",
+              paragraphs: ["Oh, did I mention, Load Balancer is LIVE!"],
+              link: {
+                url: "https://load-balancer.github.io/Home/",
+                label: "Visit Load Balancer",
+              },
+            },
+            {
+              heading1: "Feedback from users",
+              heading2: ["What worked:"],
+              bullets: [
+                "Fast capture and a clean gesture-based interface",
+                "Swipe interactions keep the screen uncluttered",
+                "Clear separation between the three buckets",
+                "Built for speed, and it reads that way to users",
+              ],
+            },
+            {
+              heading1: "",
+              heading2: [
+                "Below are some ways Load Balancer can be improved for the fellow polymaths:",
+              ],
+              bullets: [
+                "Swipe-to-delete has a confirm step but no way to undo after, so one wrong tap loses something for good",
+                "No way to snooze a task, so 'not now' and 'failed' feel like the same thing",
+                "Saving a task requires a name and a due date upfront, which slows down capture in the exact moment it needs to be instant",
+                "Courses only track a date, not actual progress, when most learning isn't a simple done-or-not-done thing",
+                "No way to export your data, so everything lives in one browser with no backup",
+                "Offline mode isn't fully reliable yet, since there's no service worker behind the install",
+                "A leftover configuration issue can cause the app to launch the wrong version after install ",
+              ],
+            },
+          ],
+        },
+        {
+          name: "72- A Spending Control App",
+          domain: "Behavioural Fintech · Personal Finance · App",
+          role: "Research, Concept, Interface Design, Solo",
+          sections: [
+            {
+              heading1: "Why",
+              paragraphs: [
+                "I wanted a real way to stop the 'why did I buy this' feeling after late-night scrolling.",
+                "Only after intensive research did I find out that this is more nuanced than a simple lack of self control",
+              ],
+              image: {
+                src: "src/72PaperWireframes.jpeg",
+                alt: "First paper wireframes for 72",
+              },
+            },
+            {
+              heading1: "Methodology",
+              paragraphs: [
+                "This one started personal, but I didn't want to just build off a gut feeling, so I went and read what the research actually says about impulse spending before designing a single screen.",
+                "Here's the problem, in plain terms: most impulse-buying tools treat every paused purchase the same way. You add something to cart, the app makes you wait it out, done. But that's flattening two very different things. Sometimes you're buying something you already needed and just got reminded of it. Other times you didn't even know you wanted the thing until an ad put it in front of you. Psychologically, those aren't the same purchase, but tools like Waitzy and Hurdl treat them identically. That felt like the actual gap.",
+                "So the app asks you to tag what you're adding the moment you add it. Necessity, if it's something you were going to buy anyway. Feel Good, if it's the scroll-and-suddenly-want-it kind. Necessity gets a light touch. Feel Good is where the friction actually goes, because that's the category where the pull is emotional, not practical.",
+                "I also moved the intervention earlier than most tools do. Most apps only make you pause at checkout, but by then some of the emotional pull has already faded on its own. The stronger moment to catch it is right when you first see the item, mid-scroll, mid-ad, mid-'only 2 left.'' That's when the trigger actually hits.",
+                "One more decision worth explaining: when the cooldown ends, the item doesn't just vanish. It fades into a dimmed state first, then disappears, leaving only the money saved behind. That's a bet that wanting something fades gradually, not all at once, so an abrupt delete might not match how the urge actually dies down. I'll be upfront that this part is a hypothesis, not something I've tested yet. It's the kind of thing I'd want to run a real usability check on before trusting it fully.",
+              ],
+              image: {
+                src: "src/project-name-methodology.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "End Results / Deliverable",
+              paragraphs: [
+                "Intro line before the bullet list, if you want one.",
+              ],
+              bullets: [
+                "Mapped out the full set of user flows and task flows for the whole experience",
+                "Designed one of those flows end to end, from first screen to last",
+                "Built every screen using reusable components, not one-off designs",
+              ],
+            },
+            {
+              heading1: "",
+              paragraphs: ["Still a concept at this stage, one complete flow built out, not a shipped product yet."],
+              link: {
+                url: "https://your-live-url.com",
+                label: "Visit Project Name",
+              },
+            },
+            {
+              heading1: "Feedback from users",
+              heading2: ["What worked:"],
+              bullets: ["Point one", "Point two"],
+            },
+            {
+              heading1: "",
+              heading2: ["What could be improved:"],
+              bullets: ["Point one", "Point two"],
+            },
+          ],
+        },
+        {
+          name: "Project Name",
+          domain: "Category · Type",
+          role: "Your role here",
+          sections: [
+            {
+              heading1: "Why",
+              paragraphs: [
+                "First paragraph of the why section goes here.",
+                "Second paragraph, if you need one.",
+              ],
+              image: {
+                src: "src/project-name-why.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "Methodology",
+              paragraphs: ["Walk through how you approached the problem."],
+              image: {
+                src: "src/project-name-methodology.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "End Results / Deliverable",
+              paragraphs: [
+                "Intro line before the bullet list, if you want one.",
+              ],
+              bullets: [
+                "First feature or outcome",
+                "Second feature or outcome",
+                "Third feature or outcome",
+              ],
+            },
+            {
+              heading1: "",
+              paragraphs: ["Any closing line, e.g. launch status."],
+              link: {
+                url: "https://your-live-url.com",
+                label: "Visit Project Name",
+              },
+            },
+            {
+              heading1: "Feedback from users",
+              heading2: ["What worked:"],
+              bullets: ["Point one", "Point two"],
+            },
+            {
+              heading1: "",
+              heading2: ["What could be improved:"],
+              bullets: ["Point one", "Point two"],
+            },
+          ],
+        },
+        {
+          name: "Project Name",
+          domain: "Category · Type",
+          role: "Your role here",
+          sections: [
+            {
+              heading1: "Why",
+              paragraphs: [
+                "First paragraph of the why section goes here.",
+                "Second paragraph, if you need one.",
+              ],
+              image: {
+                src: "src/project-name-why.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "Methodology",
+              paragraphs: ["Walk through how you approached the problem."],
+              image: {
+                src: "src/project-name-methodology.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "End Results / Deliverable",
+              paragraphs: [
+                "Intro line before the bullet list, if you want one.",
+              ],
+              bullets: [
+                "First feature or outcome",
+                "Second feature or outcome",
+                "Third feature or outcome",
+              ],
+            },
+            {
+              heading1: "",
+              paragraphs: ["Any closing line, e.g. launch status."],
+              link: {
+                url: "https://your-live-url.com",
+                label: "Visit Project Name",
+              },
+            },
+            {
+              heading1: "Feedback from users",
+              heading2: ["What worked:"],
+              bullets: ["Point one", "Point two"],
+            },
+            {
+              heading1: "",
+              heading2: ["What could be improved:"],
+              bullets: ["Point one", "Point two"],
+            },
+          ],
+        },
+        {
+          name: "Project Name",
+          domain: "Category · Type",
+          role: "Your role here",
+          sections: [
+            {
+              heading1: "Why",
+              paragraphs: [
+                "First paragraph of the why section goes here.",
+                "Second paragraph, if you need one.",
+              ],
+              image: {
+                src: "src/project-name-why.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "Methodology",
+              paragraphs: ["Walk through how you approached the problem."],
+              image: {
+                src: "src/project-name-methodology.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "End Results / Deliverable",
+              paragraphs: [
+                "Intro line before the bullet list, if you want one.",
+              ],
+              bullets: [
+                "First feature or outcome",
+                "Second feature or outcome",
+                "Third feature or outcome",
+              ],
+            },
+            {
+              heading1: "",
+              paragraphs: ["Any closing line, e.g. launch status."],
+              link: {
+                url: "https://your-live-url.com",
+                label: "Visit Project Name",
+              },
+            },
+            {
+              heading1: "Feedback from users",
+              heading2: ["What worked:"],
+              bullets: ["Point one", "Point two"],
+            },
+            {
+              heading1: "",
+              heading2: ["What could be improved:"],
+              bullets: ["Point one", "Point two"],
+            },
+          ],
+        },
+        {
+          name: "Project Name",
+          domain: "Category · Type",
+          role: "Your role here",
+          sections: [
+            {
+              heading1: "Why",
+              paragraphs: [
+                "First paragraph of the why section goes here.",
+                "Second paragraph, if you need one.",
+              ],
+              image: {
+                src: "src/project-name-why.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "Methodology",
+              paragraphs: ["Walk through how you approached the problem."],
+              image: {
+                src: "src/project-name-methodology.png",
+                alt: "Description of the image",
+              },
+            },
+            {
+              heading1: "End Results / Deliverable",
+              paragraphs: [
+                "Intro line before the bullet list, if you want one.",
+              ],
+              bullets: [
+                "First feature or outcome",
+                "Second feature or outcome",
+                "Third feature or outcome",
+              ],
+            },
+            {
+              heading1: "",
+              paragraphs: ["Any closing line, e.g. launch status."],
+              link: {
+                url: "https://your-live-url.com",
+                label: "Visit Project Name",
+              },
+            },
+            {
+              heading1: "Feedback from users",
+              heading2: ["What worked:"],
+              bullets: ["Point one", "Point two"],
+            },
+            {
+              heading1: "",
+              heading2: ["What could be improved:"],
+              bullets: ["Point one", "Point two"],
+            },
+          ],
+        },
+      ];
+
+      const cardGrid = document.getElementById("cardGrid");
+      if (cardGrid) {
+        cardGrid.innerHTML = projects
+          .map(
+            (p, index) => `
+              <div class="card-scene">
+                <div class="card" data-index="${index}" tabindex="0" role="button" aria-label="${p.name}">
+                  <div class="card-face card-front">
+                    <div class="kicker">0${index + 1}</div>
+                    <div class="name">${p.name}</div>
+                    <div class="hint">Hover to preview &rarr;</div>
+                  </div>
+                  <div class="card-face card-back">
+                    <div>
+                      <div class="field-label">DOMAIN</div>
+                      <div class="domain">${p.domain}</div>
+                      <div class="field-label">ROLE</div>
+                      <div class="role">${p.role}</div>
+                    </div>
+                    <div class="open-hint">Click to open write-up &rarr;</div>
+                  </div>
+                </div>
+              </div>
+            `,
+          )
+          .join("");
+      }
+
+      /* ---------------- Modal Mechanics ---------------- */
+      const overlay = document.getElementById("overlay");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalKicker = document.getElementById("modalKicker");
+      const modalBody = document.getElementById("modalBody");
+      const modalClose = document.getElementById("modalClose");
+
+      function openModal(project, index) {
+        if (!overlay) return;
+        modalKicker.textContent = `0${index + 1} / PROJECT`;
+        modalTitle.textContent = project.name;
+        modalBody.innerHTML = project.sections
+          .map((section) => {
+            const heading1 = section.heading1
+              ? `<h2>${section.heading1}</h2>`
+              : "";
+            const heading2 = section.heading2
+              ? `<h4>${section.heading2}</h4>`
+              : "";
+            const paragraphs = (section.paragraphs || [])
+              .map((p) => `<p>${p}</p>`)
+              .join("");
+            const bullets = section.bullets
+              ? `<ul>${section.bullets.map((b) => `<li>${b}</li>`).join("")}</ul>`
+              : "";
+            const image = section.image
+              ? `<img src="${section.image.src}" alt="${section.image.alt || ""}">`
+              : "";
+            const link = section.link
+              ? `<a class="modal-link" href="${section.link.url}" target="_blank" rel="noopener noreferrer">${section.link.label}</a>`
+              : "";
+            const video = section.video
+              ? `<video controls playsinline ${section.video.poster ? `poster="${section.video.poster}"` : ""}>
+                <source src="${section.video.src}" type="video/mp4">
+                </video>`
+              : "";
+            return `<div class="modal-section">${heading1}${heading2}${paragraphs}${bullets}${image}${link}${video}</div>`;
+          })
+          .join("");
+        overlay.classList.add("is-open");
+      }
+
+      function closeModal() {
+        if (overlay) overlay.classList.remove("is-open");
+      }
+
+      if (cardGrid) {
+        cardGrid.addEventListener("click", (e) => {
+          const card = e.target.closest(".card");
+          if (card) {
+            const index = parseInt(card.dataset.index, 10);
+            openModal(projects[index], index);
+          }
+        });
+
+        cardGrid.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            const card = e.target.closest(".card");
+            if (card) {
+              e.preventDefault();
+              const index = parseInt(card.dataset.index, 10);
+              openModal(projects[index], index);
+            }
+          }
+        });
+      }
+
+      if (modalClose) modalClose.addEventListener("click", closeModal);
+      if (overlay) {
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModal();
+        });
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+
+      /* ---------------- Posters Infinite Scroll ---------------- */
+      document.addEventListener("DOMContentLoaded", function () {
+        const carousel = document.getElementById("carousel");
+        const carouselTrack = document.getElementById("carouselTrack");
+
+        if (carouselTrack) {
+          const originalItems = Array.from(carouselTrack.children);
+          if (originalItems.length > 0) {
+            originalItems.forEach((item) => {
+              const clonedItem = item.cloneNode(true);
+              clonedItem.classList.add("carousel-track-duplicate");
+              carouselTrack.appendChild(clonedItem);
+            });
+          }
+
+          if (carousel) {
+            carousel.addEventListener("mouseenter", () =>
+              carouselTrack.classList.add("paused"),
+            );
+            carousel.addEventListener("mouseleave", () =>
+              carouselTrack.classList.remove("paused"),
+            );
+            carousel.addEventListener("touchstart", () =>
+              carouselTrack.classList.add("paused"),
+            );
+            carousel.addEventListener("touchend", () =>
+              carouselTrack.classList.remove("paused"),
+            );
+          }
+        }
+      });
+
+      /* ---------------- FAQs Data ---------------- */
+      const faqs = [
+        {
+          q: "What is your primary design philosophy?",
+          a: "I focus on human-centered design and system efficiency—cutting out unnecessary complexity so users can focus on what matters.",
+        },
+        {
+          q: "What tools do you use for development and design?",
+          a: "Figma for UI/UX design, along with HTML, CSS, JavaScript to build out the prototypes with Claude's to code them out quickly. Also proficient with Adobe Photoshop and Adobe Illustrator ",
+        },
+        {
+          q: "Your hero section lists eight different roles across biomedical, data analysis, marketing, AI/ML, and design. What's the actual throughline?",
+          a: "Every one of these was really the same question in a different outfit: how does a system actually work once real people touch it. In biomedical, that meant interviewing traffic police for an app called Booze Buster and healthcare practitioners for a pose-correction prototype, watching where the theory broke against real use. In tech consulting, it's tracing why a business rule fires wrong in an enterprise dispute system. In marketing and SEO, it's watching what actually gets attention versus what should in theory. Design is just the version of this where I get to fix what I find instead of only diagnosing it.",
+        },
+        {
+          q: "How does your graphic design and poster work relate to your product design work? ",
+          a: "Branding taught me systems before I knew to call them that. Running design across 8 college fests over 4 years meant building a visual language that had to flex across a theme, a logo, merch, and social posts, while still reading as one consistent brand. That's the same muscle as product design, just pointed at screens instead of posters: set the rules once, then make sure every piece downstream follows them without needing to be redesigned from scratch. The medium changed. The actual skill of building something coherent under constraints didn't",
+        },
+        {
+          q: "What work are you most proud of?",
+          a: "Load Balancer, without much competition. Most of what I've built started as an assignment or a brief. This one started as my own actual problem, being a polymath who kept drowning in the tools meant to help me organize. I designed it, shipped it, and then had real people using it point out exactly where it still falls short, like no undo after deleting a task, or courses needing more than just a done-or-not-done state. That feedback stung a little, but it's also the proof that it's a real product being used seriously enough for people to want it better, not just a portfolio piece that looks finished and never gets touched.",
+        },
+      ];
+
+      /* ---------------- FAQ Render ---------------- */
+      const faqList = document.getElementById("faqList");
+      if (faqList) {
+        faqList.innerHTML = faqs
+          .map(
+            (item, index) => `
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(${index})">
+            <span class="q-text">${item.q}</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer-wrap">
+            <div class="faq-answer-inner">
+              <p class="faq-answer">${item.a}</p>
+            </div>
+          </div>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      /* ---------------- FAQ Toggle Helper ---------------- */
+      function toggleFaq(index) {
+        const items = document.querySelectorAll(".faq-item");
+        items[index].classList.toggle("is-open");
+      }
+    </script>
   </body>
 </html>
