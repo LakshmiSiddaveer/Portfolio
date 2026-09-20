@@ -20,6 +20,7 @@
         --card-back-ink: #f2efe9;
         --signal: #2e4bff;
         --overlay: rgba(15, 14, 12, 0.55);
+         --modal-bg: #ffffff;
         --radius: 6px;
         --font-display: "Roboto Slab", Georgia, "Times New Roman", serif;
         --font-ui: "Raleway", -apple-system, "Segoe UI", sans-serif;
@@ -35,6 +36,7 @@
           --card-back: #faf9f6;
           --card-back-ink: #151412;
           --overlay: rgba(0, 0, 0, 0.7);
+          --modal-bg: #211f1c;
         }
       }
       :root[data-theme="dark"] {
@@ -45,6 +47,7 @@
         --card-back: #faf9f6;
         --card-back-ink: #151412;
         --overlay: rgba(0, 0, 0, 0.7);
+        --modal-bg: #211f1c;
       }
 
       * {
@@ -222,6 +225,7 @@
 
       section {
         padding-top: 88px;
+        scroll-margin-top: 100px;
       }
       section:first-of-type {
         padding-top: 72px;
@@ -535,7 +539,7 @@
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.28s ease;
-        z-index: 100;
+        z-index: 200;
       }
       .overlay.is-open {
         opacity: 1;
@@ -543,13 +547,14 @@
       }
 
       .modal {
-        background: var(--paper);
+        background: var(--modal-bg);
         color: var(--ink);
         width: 100%;
         max-width: 560px;
         max-height: 80vh;
         border-radius: var(--radius);
         border: 1px solid var(--line);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
         display: flex;
         flex-direction: column;
         transform: scale(0.94);
@@ -1399,7 +1404,7 @@
         },
         {
           q: "What tools do you use for development and design?",
-          a: "Figma for UI/UX design, along with HTML, CSS, JavaScript to build out the prototypes with Claude's to code them out quickly. Also proficient with Adobe Photoshop and Adobe Illustrator ",
+          a: "Figma for UI/UX design, along with HTML, CSS, JavaScript to build out the prototypes with Claude to code them out quickly. Also proficient with Adobe Photoshop and Adobe Illustrator. ",
         },
         {
           q: "Your hero section lists eight different roles across biomedical, data analysis, marketing, AI/ML, and design. What's the actual throughline?",
