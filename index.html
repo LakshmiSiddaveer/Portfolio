@@ -561,6 +561,126 @@
         transition: all 250ms ease-in-out;
         gap: 0.75rem;
       }
+      .contact-item {
+  position: relative;
+  display: inline-flex;
+}
+.contact-tip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 6px 12px;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
+}
+/* invisible bridge so the chip doesn't vanish while the cursor crosses the gap */
+.contact-tip::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+.contact-item:hover .contact-tip,
+.contact-item:focus-within .contact-tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.contact-tip-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.copy-btn:hover,
+.copy-btn:focus-visible {
+  background: color-mix(in srgb, var(--paper) 20%, transparent);
+}
+.copy-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+.copy-btn .icon-check {
+  display: none;
+}
+.copy-btn.is-copied .icon-copy {
+  display: none;
+}
+.copy-btn.is-copied .icon-check {
+  display: block;
+}
+
+/* touch devices: no hover, so show the value permanently under each button */
+/* phones and narrow windows: equal-width buttons, value always visible */
+@media (hover: none), (max-width: 600px) {
+  .contact-buttons > .btn,
+  .contact-item,
+  .contact-item .btn {
+    width: 100%;
+  }
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .contact-tip {
+    position: static;
+    margin-top: 8px;
+    padding: 8px 8px 8px 14px;
+    justify-content: space-between;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    background: color-mix(in srgb, var(--ink) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+    color: var(--ink);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  .contact-tip::before {
+    display: none;
+  }
+  .contact-tip-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .copy-btn:hover,
+  .copy-btn:focus-visible {
+    background: color-mix(in srgb, var(--ink) 15%, transparent);
+  }
+}
       .btn:hover {
         background-color: var(--signal);
         border-color: var(--signal);
@@ -814,6 +934,9 @@
           filter: none !important;
           transform: none !important;
         }
+        .contact-tip {
+  transition: none !important;
+}
       }
     </style>
   </head>
@@ -1002,48 +1125,93 @@
           <p>Reach out via email or connect across social channels.</p>
         </div>
         <div class="contact-buttons">
-          <a
-            href="https://www.linkedin.com/in/lakshmi-siddaveer"
-            class="btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Connect on LinkedIn"
-          >
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.4a1.6 1.6 0 1 0 1.6 1.6 1.6 1.6 0 0 0-1.6-1.6z"
-              />
-            </svg>
-            <span>LinkedIn</span>
-          </a>
+          <div class="contact-item">
+  <a
+    href="https://www.linkedin.com/in/lakshmi-siddaveer"
+    class="btn"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Connect on LinkedIn"
+  >
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.4a1.6 1.6 0 1 0 1.6 1.6 1.6 1.6 0 0 0-1.6-1.6z"
+      />
+    </svg>
+    <span>LinkedIn</span>
+  </a>
+  <div class="contact-tip">
+    <span class="contact-tip-text">linkedin.com/in/lakshmi-siddaveer</span>
+    <button
+      class="copy-btn"
+      type="button"
+      data-copy="https://www.linkedin.com/in/lakshmi-siddaveer"
+      data-label="Copy LinkedIn link"
+      aria-label="Copy LinkedIn link"
+    >
+      <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    </button>
+  </div>
+</div>
 
-          <a
-            href="mailto:lakshmisiddaveer@gmail.com"
-            class="btn"
-            aria-label="Send an email"
-          >
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-              />
-            </svg>
-            <span>Email</span>
-          </a>
+          <div class="contact-item">
+  <a
+    href="mailto:lakshmisiddaveer@gmail.com"
+    class="btn"
+    aria-label="Send an email"
+  >
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+      />
+    </svg>
+    <span>Email</span>
+  </a>
+  <div class="contact-tip">
+    <span class="contact-tip-text">lakshmisiddaveer@gmail.com</span>
+    <button
+      class="copy-btn"
+      type="button"
+      data-copy="lakshmisiddaveer@gmail.com"
+      data-label="Copy email address"
+      aria-label="Copy email address"
+    >
+      <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    </button>
+  </div>
+</div>
 
-          <a
-            href="https://behance.net/lakshmisiddave"
-            class="btn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="View portfolio on Behance"
-          >
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M22 7h-7V5h7v2zm-1.72 5.03c-.22-.98-.94-1.68-2.2-1.68-1.57 0-2.42 1.19-2.42 2.76 0 1.62.88 2.76 2.45 2.76 1.1 0 1.88-.54 2.15-1.55h-1.68c-.12.33-.37.52-.77.52-.61 0-1.02-.45-1.05-1.16h3.58c.02-.19.04-.45.04-.65 0-.32-.03-.73-.1-1zm-3.53.22c.07-.63.45-1.02.99-1.02.52 0 .88.37.95 1.02h-1.94zM10.84 10.3c.69-.37 1.12-1.03 1.12-1.89 0-1.42-1.08-2.21-2.82-2.21H4v11.6h5.45c1.87 0 3.05-.88 3.05-2.43 0-1.19-.68-2.09-1.66-2.67zM6.65 8.12h2.2c.81 0 1.28.37 1.28.98 0 .63-.49 1.02-1.28 1.02h-2.2V8.12zm2.4 7.74h-2.4v-2.22h2.4c.9 0 1.41.4 1.41 1.1 0 .73-.51 1.12-1.41 1.12z"
-              />
-            </svg>
-            <span>Behance</span>
-          </a>
+          <div class="contact-item">
+  <a
+    href="https://behance.net/lakshmisiddave"
+    class="btn"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="View portfolio on Behance"
+  >
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M22 7h-7V5h7v2zm-1.72 5.03c-.22-.98-.94-1.68-2.2-1.68-1.57 0-2.42 1.19-2.42 2.76 0 1.62.88 2.76 2.45 2.76 1.1 0 1.88-.54 2.15-1.55h-1.68c-.12.33-.37.52-.77.52-.61 0-1.02-.45-1.05-1.16h3.58c.02-.19.04-.45.04-.65 0-.32-.03-.73-.1-1zm-3.53.22c.07-.63.45-1.02.99-1.02.52 0 .88.37.95 1.02h-1.94zM10.84 10.3c.69-.37 1.12-1.03 1.12-1.89 0-1.42-1.08-2.21-2.82-2.21H4v11.6h5.45c1.87 0 3.05-.88 3.05-2.43 0-1.19-.68-2.09-1.66-2.67zM6.65 8.12h2.2c.81 0 1.28.37 1.28.98 0 .63-.49 1.02-1.28 1.02h-2.2V8.12zm2.4 7.74h-2.4v-2.22h2.4c.9 0 1.41.4 1.41 1.1 0 .73-.51 1.12-1.41 1.12z"
+      />
+    </svg>
+    <span>Behance</span>
+  </a>
+  <div class="contact-tip">
+    <span class="contact-tip-text">behance.net/lakshmisiddave</span>
+    <button
+      class="copy-btn"
+      type="button"
+      data-copy="https://behance.net/lakshmisiddave"
+      data-label="Copy Behance link"
+      aria-label="Copy Behance link"
+    >
+      <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+    </button>
+  </div>
+</div>
 
           <a
             href="src/Lakshmi_Siddaveer_Designer_Resume.pdf"
@@ -1528,6 +1696,31 @@
         const items = document.querySelectorAll(".faq-item");
         items[index].classList.toggle("is-open");
       }
+      /* ---------------- Copy contact values ---------------- */
+document.querySelectorAll(".copy-btn").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const value = btn.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      // fallback for older browsers or opening the file straight from disk
+      const ta = document.createElement("textarea");
+      ta.value = value;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    btn.classList.add("is-copied");
+    btn.setAttribute("aria-label", "Copied");
+    setTimeout(() => {
+      btn.classList.remove("is-copied");
+      btn.setAttribute("aria-label", btn.dataset.label);
+    }, 1600);
+  });
+});
     </script>
   </body>
 </html>
