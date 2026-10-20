@@ -139,12 +139,12 @@
         display: block;
       }
       .nav-logo img {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-}
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
+      }
       .logo-hover-group {
         position: relative;
         display: flex;
@@ -562,125 +562,125 @@
         gap: 0.75rem;
       }
       .contact-item {
-  position: relative;
-  display: inline-flex;
-}
-.contact-tip {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 10px;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 6px 6px 12px;
-  border-radius: var(--radius);
-  background: var(--ink);
-  color: var(--paper);
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-4px);
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0.2s;
-}
-/* invisible bridge so the chip doesn't vanish while the cursor crosses the gap */
-.contact-tip::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 0;
-  right: 0;
-  height: 10px;
-}
-.contact-item:hover .contact-tip,
-.contact-item:focus-within .contact-tip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-.contact-tip-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.copy-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: none;
-  border-radius: 4px;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.2s ease;
-}
-.copy-btn:hover,
-.copy-btn:focus-visible {
-  background: color-mix(in srgb, var(--paper) 20%, transparent);
-}
-.copy-btn svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
-}
-.copy-btn .icon-check {
-  display: none;
-}
-.copy-btn.is-copied .icon-copy {
-  display: none;
-}
-.copy-btn.is-copied .icon-check {
-  display: block;
-}
+        position: relative;
+        display: inline-flex;
+      }
+      .contact-tip {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 10px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 6px 6px 12px;
+        border-radius: var(--radius);
+        background: var(--ink);
+        color: var(--paper);
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-4px);
+        transition:
+          opacity 0.2s ease,
+          transform 0.2s ease,
+          visibility 0.2s;
+      }
+      /* invisible bridge so the chip doesn't vanish while the cursor crosses the gap */
+      .contact-tip::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: 0;
+        right: 0;
+        height: 10px;
+      }
+      .contact-item:hover .contact-tip,
+      .contact-item:focus-within .contact-tip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .contact-tip-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        border-radius: 4px;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+      }
+      .copy-btn:hover,
+      .copy-btn:focus-visible {
+        background: color-mix(in srgb, var(--paper) 20%, transparent);
+      }
+      .copy-btn svg {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+      .copy-btn .icon-check {
+        display: none;
+      }
+      .copy-btn.is-copied .icon-copy {
+        display: none;
+      }
+      .copy-btn.is-copied .icon-check {
+        display: block;
+      }
 
-/* touch devices: no hover, so show the value permanently under each button */
-/* phones and narrow windows: equal-width buttons, value always visible */
-@media (hover: none), (max-width: 600px) {
-  .contact-buttons > .btn,
-  .contact-item,
-  .contact-item .btn {
-    width: 100%;
-  }
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .contact-tip {
-    position: static;
-    margin-top: 8px;
-    padding: 8px 8px 8px 14px;
-    justify-content: space-between;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    background: color-mix(in srgb, var(--ink) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
-    color: var(--ink);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-  }
-  .contact-tip::before {
-    display: none;
-  }
-  .contact-tip-text {
-    flex: 1;
-    min-width: 0;
-  }
-  .copy-btn:hover,
-  .copy-btn:focus-visible {
-    background: color-mix(in srgb, var(--ink) 15%, transparent);
-  }
-}
+      /* touch devices: no hover, so show the value permanently under each button */
+      /* phones and narrow windows: equal-width buttons, value always visible */
+      @media (hover: none), (max-width: 600px) {
+        .contact-buttons > .btn,
+        .contact-item,
+        .contact-item .btn {
+          width: 100%;
+        }
+        .contact-item {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .contact-tip {
+          position: static;
+          margin-top: 8px;
+          padding: 8px 8px 8px 14px;
+          justify-content: space-between;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          background: color-mix(in srgb, var(--ink) 8%, transparent);
+          border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+          color: var(--ink);
+          -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+        }
+        .contact-tip::before {
+          display: none;
+        }
+        .contact-tip-text {
+          flex: 1;
+          min-width: 0;
+        }
+        .copy-btn:hover,
+        .copy-btn:focus-visible {
+          background: color-mix(in srgb, var(--ink) 15%, transparent);
+        }
+      }
       .btn:hover {
         background-color: var(--signal);
         border-color: var(--signal);
@@ -935,8 +935,8 @@
           transform: none !important;
         }
         .contact-tip {
-  transition: none !important;
-}
+          transition: none !important;
+        }
       }
     </style>
   </head>
@@ -948,7 +948,11 @@
         <!-- <a href="#top" class="nav-logo">LS</a> -->
         <div class="logo-hover-group">
           <a href="#top" class="nav-logo">
-            <img src="src\WithoutIDCardBW.png" alt="Lakshmi Siddaveer logo"oncontextmenu="return false;" />
+            <img
+              src="src\WithoutIDCardBW.png"
+              alt="Lakshmi Siddaveer logo"
+              oncontextmenu="return false;"
+            />
           </a>
           <span class="nav-tagline" id="navTagline"
             >Let's Build Cool Stuff!</span
@@ -1126,92 +1130,112 @@
         </div>
         <div class="contact-buttons">
           <div class="contact-item">
-  <a
-    href="https://www.linkedin.com/in/lakshmi-siddaveer"
-    class="btn"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Connect on LinkedIn"
-  >
-    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.4a1.6 1.6 0 1 0 1.6 1.6 1.6 1.6 0 0 0-1.6-1.6z"
-      />
-    </svg>
-    <span>LinkedIn</span>
-  </a>
-  <div class="contact-tip">
-    <span class="contact-tip-text">linkedin.com/in/lakshmi-siddaveer</span>
-    <button
-      class="copy-btn"
-      type="button"
-      data-copy="https://www.linkedin.com/in/lakshmi-siddaveer"
-      data-label="Copy LinkedIn link"
-      aria-label="Copy LinkedIn link"
-    >
-      <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-      <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-    </button>
-  </div>
-</div>
+            <a
+              href="https://www.linkedin.com/in/lakshmi-siddaveer"
+              class="btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Connect on LinkedIn"
+            >
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.4a1.6 1.6 0 1 0 1.6 1.6 1.6 1.6 0 0 0-1.6-1.6z"
+                />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <div class="contact-tip">
+              <span class="contact-tip-text"
+                >linkedin.com/in/lakshmi-siddaveer</span
+              >
+              <button
+                class="copy-btn"
+                type="button"
+                data-copy="https://www.linkedin.com/in/lakshmi-siddaveer"
+                data-label="Copy LinkedIn link"
+                aria-label="Copy LinkedIn link"
+              >
+                <svg class="icon-copy" viewBox="0 0 24 24">
+                  <path
+                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                  />
+                </svg>
+                <svg class="icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <div class="contact-item">
-  <a
-    href="mailto:lakshmisiddaveer@gmail.com"
-    class="btn"
-    aria-label="Send an email"
-  >
-    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-      />
-    </svg>
-    <span>Email</span>
-  </a>
-  <div class="contact-tip">
-    <span class="contact-tip-text">lakshmisiddaveer@gmail.com</span>
-    <button
-      class="copy-btn"
-      type="button"
-      data-copy="lakshmisiddaveer@gmail.com"
-      data-label="Copy email address"
-      aria-label="Copy email address"
-    >
-      <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-      <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-    </button>
-  </div>
-</div>
+            <a
+              href="mailto:lakshmisiddaveer@gmail.com"
+              class="btn"
+              aria-label="Send an email"
+            >
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                />
+              </svg>
+              <span>Email</span>
+            </a>
+            <div class="contact-tip">
+              <span class="contact-tip-text">lakshmisiddaveer@gmail.com</span>
+              <button
+                class="copy-btn"
+                type="button"
+                data-copy="lakshmisiddaveer@gmail.com"
+                data-label="Copy email address"
+                aria-label="Copy email address"
+              >
+                <svg class="icon-copy" viewBox="0 0 24 24">
+                  <path
+                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                  />
+                </svg>
+                <svg class="icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <div class="contact-item">
-  <a
-    href="https://behance.net/lakshmisiddave"
-    class="btn"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="View portfolio on Behance"
-  >
-    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M22 7h-7V5h7v2zm-1.72 5.03c-.22-.98-.94-1.68-2.2-1.68-1.57 0-2.42 1.19-2.42 2.76 0 1.62.88 2.76 2.45 2.76 1.1 0 1.88-.54 2.15-1.55h-1.68c-.12.33-.37.52-.77.52-.61 0-1.02-.45-1.05-1.16h3.58c.02-.19.04-.45.04-.65 0-.32-.03-.73-.1-1zm-3.53.22c.07-.63.45-1.02.99-1.02.52 0 .88.37.95 1.02h-1.94zM10.84 10.3c.69-.37 1.12-1.03 1.12-1.89 0-1.42-1.08-2.21-2.82-2.21H4v11.6h5.45c1.87 0 3.05-.88 3.05-2.43 0-1.19-.68-2.09-1.66-2.67zM6.65 8.12h2.2c.81 0 1.28.37 1.28.98 0 .63-.49 1.02-1.28 1.02h-2.2V8.12zm2.4 7.74h-2.4v-2.22h2.4c.9 0 1.41.4 1.41 1.1 0 .73-.51 1.12-1.41 1.12z"
-      />
-    </svg>
-    <span>Behance</span>
-  </a>
-  <div class="contact-tip">
-    <span class="contact-tip-text">behance.net/lakshmisiddave</span>
-    <button
-      class="copy-btn"
-      type="button"
-      data-copy="https://behance.net/lakshmisiddave"
-      data-label="Copy Behance link"
-      aria-label="Copy Behance link"
-    >
-      <svg class="icon-copy" viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-      <svg class="icon-check" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-    </button>
-  </div>
-</div>
+            <a
+              href="https://behance.net/lakshmisiddave"
+              class="btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View portfolio on Behance"
+            >
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M22 7h-7V5h7v2zm-1.72 5.03c-.22-.98-.94-1.68-2.2-1.68-1.57 0-2.42 1.19-2.42 2.76 0 1.62.88 2.76 2.45 2.76 1.1 0 1.88-.54 2.15-1.55h-1.68c-.12.33-.37.52-.77.52-.61 0-1.02-.45-1.05-1.16h3.58c.02-.19.04-.45.04-.65 0-.32-.03-.73-.1-1zm-3.53.22c.07-.63.45-1.02.99-1.02.52 0 .88.37.95 1.02h-1.94zM10.84 10.3c.69-.37 1.12-1.03 1.12-1.89 0-1.42-1.08-2.21-2.82-2.21H4v11.6h5.45c1.87 0 3.05-.88 3.05-2.43 0-1.19-.68-2.09-1.66-2.67zM6.65 8.12h2.2c.81 0 1.28.37 1.28.98 0 .63-.49 1.02-1.28 1.02h-2.2V8.12zm2.4 7.74h-2.4v-2.22h2.4c.9 0 1.41.4 1.41 1.1 0 .73-.51 1.12-1.41 1.12z"
+                />
+              </svg>
+              <span>Behance</span>
+            </a>
+            <div class="contact-tip">
+              <span class="contact-tip-text">behance.net/lakshmisiddave</span>
+              <button
+                class="copy-btn"
+                type="button"
+                data-copy="https://behance.net/lakshmisiddave"
+                data-label="Copy Behance link"
+                aria-label="Copy Behance link"
+              >
+                <svg class="icon-copy" viewBox="0 0 24 24">
+                  <path
+                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                  />
+                </svg>
+                <svg class="icon-check" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <a
             href="src/Lakshmi_Siddaveer_Designer_Resume.pdf"
@@ -1307,11 +1331,11 @@
         heroRoles.innerHTML = roles
           .map(
             ([org, title]) => `
-              <div class="role-row">
-                <div class="org">${org}</div>
-                <div class="title">${title}</div>
-              </div>
-            `,
+                    <div class="role-row">
+                      <div class="org">${org}</div>
+                      <div class="title">${title}</div>
+                    </div>
+                  `,
           )
           .join("");
       }
@@ -1504,6 +1528,108 @@
             },
           ],
         },
+        {
+          name: "GORA: Reservation Flow Brutal Audit",
+          domain: "E-Commerce · Two-Sided Marketplaces · SportsTech & Leisure",
+          role: "Product Management: Growth & Funnel Optimization",
+          sections: [
+            {
+              heading1:
+                "Optimizing a high-traffic booking funnel to decrease checkout friction and unlock beginner user acquisition. ",
+            },
+            {
+              heading1: "1. The Problem",
+              heading2:
+                "Spotting the Cognitive Overhead in GORA's Booking Funnel",
+              image: {
+                src: "src/GORA-audit-screenshot.png",
+                alt: "A snippet from the Heuristics Audit that was conducted on GORA platform, the image contains annotation on the issue seen",
+              },
+              paragraphs: [
+                "Rakuten GORA is already the market leader for online golf bookings in Japan, but they're trying to grow by bringing beginner and casual golfers into the ecosystem. I wanted to see why these new users were dropping off, so I dug into the core reservation flow.",
+                "I ran a heuristic evaluation on the checkout path and found a ton of interaction friction. The current UI assumes a really advanced user mental model, it basically expects a first-time casual golfer to already have the domain knowledge of a pro and a perfect map of Japan memorised.",
+                "Because the interface forces so much cognitive overhead onto rookies, it creates a massive learning curve. I realised this friction was the main culprit causing immediate funnel abandonment and tanking their conversion rates.",
+              ],
+            },
+            {
+              heading1: "2. The Alternative",
+              heading2: "How Do We Fix the Funnel?",
+              paragraphs: [
+                "To modernise GORA’s reservation path and capture the next generation of golfers, I evaluated three distinct strategic directions:",
+              ],
+              bullets: [
+                "Option A: The Complete Overhaul (Rebuild the Entire Booking Engine). Tear down the legacy tech stack and launch a modern, single-page application experience from scratch.",
+                "Option B: The Hyper-Segmented Fork ('Beginner Mode' vs. 'Pro Mode'). Build a toggle switch at the top of the app that completely changes the layout, terminology, and interface based on the user's self-selected expertise.",
+                "Option C: The Friction Surgery (Targeted, High-Severity UI Alignment). Leave the backend infrastructure intact but ruthlessly eliminate high-friction cognitive blocks on the initial search form and the course detail pages, pulling existing UI components forward to create consistency..",
+              ],
+            },
+            {
+              heading1: "3. The Trade offs",
+              heading2: "Making the Product Call",
+              paragraphs: [
+                "You can’t build everything at once. You have to balance engineering complexity against customer impact. Here is why I chose Option C (Friction Surgery):",
+              ],
+              image: {
+                src: "src/Gora_Pros_Tradeoffs_table.png",
+                alt: "A table of 3 options for fixing GORA's problems mapped to their respective Pros and Tradeoffs",
+              },
+            },
+            {
+              paragraphs: [
+                "The Product Decision: Option C is the highest leverage MVP. Why build a whole new 'Pro Mode' when GORA’s existing results sidebar already features modern UI patterns (like dual-handle price sliders)? By migrating those existing components to the front of the funnel, we solve the highest-severity friction points with minimal development hours.",
+              ],
+            },
+            {
+              heading1: "4. Execution",
+              heading2: "The High-Friction Culprits & The PM Redesign",
+              paragraphs: [
+                "I mapped out the critical drop-off points across the reservation flow and translated them into clear, actionable product requirements.",
+              ],
+            },
+            {
+              heading2:
+                "Phase 1: Optimizing the Search Form (Fixing the Top of the Funnel)",
+              bullets: [
+                "The Date Selection Cognitive Load: I noticed the UI forces users to parse a three-month calendar without a visual legend, while separating month, day, and duration into isolated input fields.",
+                "My Solution: I unified these fields into a singular date-range picker component, eliminating the need for users to mentally calculate duration in a standalone dropdown.",
+                "The Prefectures Choice Overload: Looking at the location selection, I found a dense matrix of checkboxes that relies heavily on the user's recall of Japanese geography rather than recognition.",
+                "My Solution: To lower this barrier, I implemented a few UI accelerators: an autocomplete search bar, a geolocation 'Near Me' toggle, and an interactive map overlay.",
+                "The Component Inconsistency: I spotted a major heuristic violation where the initial search form uses a rigid ¥1,000-increment dropdown for budgeting, while the search results page utilizes a fluid dual-handle range slider.",
+                "My Solution: I removed this design friction by repurposing that existing, high-performing range-slider component and moving it upstream directly into the initial search screen.",
+              ],
+            },
+            {
+              heading2:
+                "Phase 2: Redesigning the Course Detail Page (Reducing Mid-Funnel Friction)",
+              bullets: [
+                "The Information Architecture Blindspot: I noticed the page displays rich media and course specs, but completely masks the actual cost, forcing a delayed information disclosure until users click deeper into the checkout flow.",
+                "My Solution: I adapted a proven e-commerce design pattern by introducing a persistent 'From ¥X per round' price anchor near the top hero section, giving users immediate clarity without the guesswork.",
+                "The Biased Default State: I found that the pricing engine automatically defaults the gender toggle to 'Male' without providing any contextual transparency as to why gender alters the tariff dynamic.",
+                "My Solution: I updated the system to default to a neutral state or dynamically pull from the logged-in user's profile data, adding an inline tooltip to explain regional golf course pricing standards.",
+                "The Domain Jargon Barrier: While reviewing the typography and content, I realized the interface relies heavily on niche golf terminology like 'Near-pin' and 'Driving Contest' without any onboarding support for casual players.",
+                "My Solution: I designed a scannable 'Course at a Glance' metadata card to surface high-level insights (e.g., beginner-friendly difficulty, travel distance from Tokyo) and paired the technical terms with progressive disclosure tooltips.",
+              ],
+            },
+            {
+              heading1: "5. Success Metrics",
+              heading2: "What We Are Tracking",
+              paragraphs: [
+                "We shouldn't just ship features and walk away; we gotta measure outcomes. To validate if these changes actually open up GORA to the casual market, I would track the following product KPIs",
+              ],
+              bullets: [
+                "Primary Metric: Booking Conversion Rate (The percentage of users who start a search and successfully complete a reservation).",
+                "Secondary Metric: Funnel Drop-off Rate on the initial Search Screen (Targeting a significant reduction in abandonment due to the new unified date and price pickers).",
+                "Growth Segment Metric: New User / First-Time Bookings (Tracking the volume increase in users self-identifying as beginners or casual players).",
+              ],
+            },
+            {
+              paragraphs: [
+                "Thanks for reading this far! If you’re currently working on a product that has a frustrating user flow or a leaky funnel, I’d love to help out as a thank you. Send it over, and I'll run a quick heuristic audit on that flow to help you fix the friction.",
+                "Email: lakshmisiddaveer@gmail.com/ hello@theproductdissect.com",
+              ],
+            },
+          ],
+        },
       ];
 
       const cardGrid = document.getElementById("cardGrid");
@@ -1511,25 +1637,25 @@
         cardGrid.innerHTML = projects
           .map(
             (p, index) => `
-              <div class="card-scene">
-                <div class="card" data-index="${index}" tabindex="0" role="button" aria-label="${p.name}">
-                  <div class="card-face card-front">
-                    <div class="kicker">0${index + 1}</div>
-                    <div class="name">${p.name}</div>
-                    <div class="hint">Hover to preview &rarr;</div>
-                  </div>
-                  <div class="card-face card-back">
-                    <div>
-                      <div class="field-label">DOMAIN</div>
-                      <div class="domain">${p.domain}</div>
-                      <div class="field-label">ROLE</div>
-                      <div class="role">${p.role}</div>
+                    <div class="card-scene">
+                      <div class="card" data-index="${index}" tabindex="0" role="button" aria-label="${p.name}">
+                        <div class="card-face card-front">
+                          <div class="kicker">0${index + 1}</div>
+                          <div class="name">${p.name}</div>
+                          <div class="hint">Hover to preview &rarr;</div>
+                        </div>
+                        <div class="card-face card-back">
+                          <div>
+                            <div class="field-label">DOMAIN</div>
+                            <div class="domain">${p.domain}</div>
+                            <div class="field-label">ROLE</div>
+                            <div class="role">${p.role}</div>
+                          </div>
+                          <div class="open-hint">Click to open write-up &rarr;</div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="open-hint">Click to open write-up &rarr;</div>
-                  </div>
-                </div>
-              </div>
-            `,
+                  `,
           )
           .join("");
       }
@@ -1567,8 +1693,8 @@
               : "";
             const video = section.video
               ? `<video controls playsinline ${section.video.poster ? `poster="${section.video.poster}"` : ""}>
-                <source src="${section.video.src}" type="video/mp4">
-                </video>`
+                      <source src="${section.video.src}" type="video/mp4">
+                      </video>`
               : "";
             return `<div class="modal-section">${heading1}${heading2}${paragraphs}${bullets}${image}${link}${video}</div>`;
           })
@@ -1673,20 +1799,20 @@
         faqList.innerHTML = faqs
           .map(
             (item, index) => `
-        <div class="faq-item">
-          <button class="faq-question" onclick="toggleFaq(${index})">
-            <span class="q-text">${item.q}</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </button>
-          <div class="faq-answer-wrap">
-            <div class="faq-answer-inner">
-              <p class="faq-answer">${item.a}</p>
-            </div>
-          </div>
-        </div>
-      `,
+              <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(${index})">
+                  <span class="q-text">${item.q}</span>
+                  <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div class="faq-answer-wrap">
+                  <div class="faq-answer-inner">
+                    <p class="faq-answer">${item.a}</p>
+                  </div>
+                </div>
+              </div>
+            `,
           )
           .join("");
       }
@@ -1697,30 +1823,30 @@
         items[index].classList.toggle("is-open");
       }
       /* ---------------- Copy contact values ---------------- */
-document.querySelectorAll(".copy-btn").forEach((btn) => {
-  btn.addEventListener("click", async () => {
-    const value = btn.dataset.copy;
-    try {
-      await navigator.clipboard.writeText(value);
-    } catch {
-      // fallback for older browsers or opening the file straight from disk
-      const ta = document.createElement("textarea");
-      ta.value = value;
-      ta.style.position = "fixed";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-    }
-    btn.classList.add("is-copied");
-    btn.setAttribute("aria-label", "Copied");
-    setTimeout(() => {
-      btn.classList.remove("is-copied");
-      btn.setAttribute("aria-label", btn.dataset.label);
-    }, 1600);
-  });
-});
+      document.querySelectorAll(".copy-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const value = btn.dataset.copy;
+          try {
+            await navigator.clipboard.writeText(value);
+          } catch {
+            // fallback for older browsers or opening the file straight from disk
+            const ta = document.createElement("textarea");
+            ta.value = value;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+          }
+          btn.classList.add("is-copied");
+          btn.setAttribute("aria-label", "Copied");
+          setTimeout(() => {
+            btn.classList.remove("is-copied");
+            btn.setAttribute("aria-label", btn.dataset.label);
+          }, 1600);
+        });
+      });
     </script>
   </body>
 </html>
